@@ -1,4 +1,4 @@
-package com.restassured.api;
+package day1;
 
 import static io.restassured.RestAssured.*;
 import static io.restassured.matcher.RestAssuredMatchers.*;
