@@ -1,4 +1,4 @@
-package day1;
+package day11;
 
 import static io.restassured.RestAssured.*;
 import static io.restassured.matcher.RestAssuredMatchers.*;
@@ -21,7 +21,7 @@ import org.testng.annotations.Test;
  */
 
 
-public class HTTPrequests {
+public class HTTPrequest {
 	
 	int id;
 	@Test(priority=1)
@@ -43,8 +43,8 @@ public class HTTPrequests {
 	public void postRequest() { //this will create a user
 		
 		HashMap hm=new HashMap();
-		hm.put("name", "jambaris");
-		hm.put("job", "leaders");
+		hm.put("name", "jambarise");
+		hm.put("job", "leaderse");
 		
 	id=	given()			//this will capture the id 
 		.contentType("application/json")
@@ -52,7 +52,7 @@ public class HTTPrequests {
 		
 		.when()
 		.post("https://reqres.in/api/users") /// this will create the new id
-		.jsonPath().getInt("id")  //
+		.jsonPath().getInt("id")  // it will get the id of newly created user
 		
 		;
 		
@@ -69,8 +69,8 @@ public class HTTPrequests {
 public void putRequest() { //this will update a user
 		
 		HashMap hm=new HashMap();
-		hm.put("name", "jambaris");
-		hm.put("job", "leaders");
+		hm.put("name", "jambarise");
+		hm.put("job", "leaderse");
 		
 		given()		
 		.contentType("application/json")
@@ -88,4 +88,16 @@ public void putRequest() { //this will update a user
 		.log().all()
 		; 
 }
+	@Test(priority=4)
+	public void deleteRequest() {
+		given()
+		
+		.when()
+		.delete("https://reqres.in/api/users/"+id) // it will delete the newly created user data
+		
+		.then()
+		.statusCode(204) // status code of delete
+		.log().all() // since we are deleting it it will show no content in results for this @Test
+		;
+	}
 }
